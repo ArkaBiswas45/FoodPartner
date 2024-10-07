@@ -1,0 +1,93 @@
+body{ 
+    background-image: url(assets/Images/loginbg4.jpg); 
+    background-size:cover; 
+    background-position: center; 
+ 
+} 
+.all{ 
+    display: flex; 
+    justify-content: center; 
+    position: relative; 
+    bottom: 1vw; 
+    min-height: 100vh; 
+    align-items: center; 
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+} 
+.form{ 
+    display: flex; 
+    justify-content: center; 
+    position: relative; 
+    flex-direction: column; 
+    gap: 30px; 
+    background-color: #f5ffe8; 
+    padding: 40px; 
+    border-radius: 20px; 
+    font-size: 20px; 
+} 
+ 
+.email{ 
+    padding: 5px; 
+    border: 1px solid black; 
+    border-radius: 12px; 
+} 
+.gender{ 
+    padding: 5px; 
+    border: 1px solid black; 
+    border-radius: 12px; 
+} 
+.dob{ 
+    padding: 5px; 
+    border: 1px solid black; 
+    border-radius: 12px; 
+} 
+.dob input{ 
+    background: transparent; 
+    border-radius: 5px; 
+} 
+.designation{ 
+    padding: 5px; 
+    border: 1px solid black; 
+    border-radius: 12px; 
+} 
+.designation input{ 
+    background: transparent; 
+    border-radius: 5px; 
+} 
+.pictures{ 
+    padding: 5px; 
+    border: 1px solid black; 
+    border-radius: 12px; 
+} 
+.foods{ 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+} 
+.foodBox{ 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    gap: 10px; 
+    padding: 5px; 
+    border: 1px solid black; 
+    border-radius: 12px; 
+} 
+.email{ 
+    padding: 5px; 
+    border: 1px solid black; 
+    border-radius: 12px; 
+} 
+.email input{ 
+    background: transparent; 
+    border-radius: 5px; 
+} 
+.btn{ 
+    display: flex; 
+    justify-content: flex-end; 
+} 
+.btn .submit{ 
+    background: transparent; 
+    border-radius: 5px; 
+    font-size: 20px; 
+}

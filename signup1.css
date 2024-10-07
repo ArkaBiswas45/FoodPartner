@@ -1,0 +1,96 @@
+body {
+    background: url(assets/Images/loginbg4.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.all {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 1vw;
+    min-height: 100vh;
+    align-items: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.form {
+    background-color: #f5ffe8;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 36px;
+    color: rgb(33, 35, 35);
+}
+
+form label {
+    display: flex;
+}
+
+.box {
+    margin-bottom: 15px;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.box input {
+    border: 2px solid black;
+    border-radius: 12px;
+    width: 570px;
+    height: 65px;
+    background: transparent;
+    outline: none;
+    font-size: large;
+    color: rgb(14, 14, 15);
+}
+
+@media screen and (max-width: 1600px) {
+    .box input {
+        width: 370px;
+        height: 45px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .box input {
+        width: 270px;
+        height: 35px;
+    }
+}
+
+.btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn .bord {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.bttn {
+    width: 100px;
+    height: 60px;
+    color: rgb(16, 16, 15);
+    font-size: 20px;
+    font-weight: bold;
+    background: transparent;
+}
+
+.btn a {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 980px) {
+    .bttn {
+        width: 80px;
+        height: 40px;
+    }
+}

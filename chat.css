@@ -1,0 +1,90 @@
+/* Overall chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height */
+    max-width: 600px; /* Max width of chat */
+    margin: auto; /* Center align */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+/* Message display area */
+.message-display {
+    flex: 1; /* Allow to grow */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Individual message styles */
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    max-width: 80%; /* Limit message width */
+    clear: both; /* Clear floats */
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center align items vertically */
+}
+
+/* Styles for received messages */
+.message.incoming {
+    background-color: #e1f7d5; /* Light green background */
+    align-self: flex-start; /* Align to left */
+}
+
+/* Styles for sent messages */
+.message.outgoing {
+    background-color: #d0e0e0; /* Light blue background */
+    align-self: flex-end; /* Align to right */
+}
+
+/* Profile picture styles */
+.profile-pic {
+    width: 10px; /* Set width of the profile picture */
+    height: 10px; /* Set height of the profile picture */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px; /* Space between image and message */
+}
+
+/* Input area styles */
+textarea {
+    resize: none; /* Prevent resizing */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    width: calc(100% - 22px); /* Full width with padding */
+    font-size: 14px;
+}
+
+/* Send button styles */
+button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer; /* Pointer on hover */
+    margin: 10px; /* Margin for spacing */
+    font-size: 14px;
+}
+
+/* Send button hover effect */
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Adjust textarea and button styles for mobile */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 95%; /* Full width on small screens */
+    }
+
+    button {
+        width: 100%; /* Full width button */
+    }
+}

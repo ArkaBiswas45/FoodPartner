@@ -1,0 +1,152 @@
+ body {
+    background: url(assets/Images/loginbg4.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 1vw;
+    min-height: 100vh;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    text-align: center;
+    font-size: 36px;
+    color: rgb(20, 20, 20);
+}
+
+.email {
+    margin-bottom: 15px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    border-radius: 10px;
+}
+
+.email input {
+    border: none;
+    width: 20vw;
+    height: 2vw;
+    padding: 10px;
+    background: transparent;
+    outline: none;
+    font-size: large;
+    color: rgb(14, 14, 15);
+}
+
+.email input::placeholder {
+    color: rgb(8, 8, 8);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+@media screen and (max-width: 982px){
+    .email input::placeholder {
+        font-size: 15px;
+    }
+
+}
+
+
+.email svg {
+    position: static;
+    right: 39vw;
+    top: 18.5vw;
+}
+
+.password {
+    margin-bottom: 15px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    border-radius: 10px;
+}
+
+.password input {
+    border: none;
+    padding: 10px;
+    width: 20vw;
+    height: 2vw;
+    background: transparent;
+    outline: none;
+    font-size: large;
+    color: rgb(8, 8, 8);
+}
+
+.password input::placeholder {
+    color: rgb(19, 19, 18);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+@media screen and (max-width: 982px){
+    .password input::placeholder {
+        font-size: 15px;
+    }
+}
+
+.password svg {
+    position: static;
+    right: 39vw;
+    top: 23vw;
+}
+
+.remeber {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.rem-text {
+    color: rgb(16, 16, 15);
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.forget-pass {
+    border: none;
+    padding: 10px;
+
+}
+
+.forget-pass a {
+    color: rgb(11, 11, 11);
+
+}
+
+.forget-pass a :hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    padding: 10px 20px;
+    border-color: rgb(22, 56, 56);
+    border-radius: 20px;
+    color: rgb(16, 16, 15);
+    font-size: 20px;
+    font-weight: bold;
+    background: transparent;
+}
+
+.register {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: rgb(12, 12, 12);
+}
+
+.register p a {
+    color: rgb(9, 9, 9);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register p a:hover {
+    text-decoration: underline;
+}

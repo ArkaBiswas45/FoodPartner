@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.message-list {
+    padding: 10px;
+}
+
+.conversation {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    color: black;
+}
+
+.unread {
+    background-color: #e6f7ff;
+}
+
+.unread-badge {
+    color: red;
+    font-weight: bold;
+}
+
+.conversation-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.last-message {
+    color: #888;
+}

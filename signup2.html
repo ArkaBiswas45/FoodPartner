@@ -1,0 +1,78 @@
+<?php
+session_start();
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - Step 2</title>
+    <link rel="stylesheet" href="signup2.css">
+</head>
+<body>
+    <div class="all">
+        <form class="form" action="signup2.php" method="post" enctype="multipart/form-data">
+            <h2>Sign Up-2</h2>
+            <div class="gender">
+                <label>Pick Your Gender</label>
+                <input type="radio" id="male" name="gender" value="M">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="F">
+                <label for="female">Female</label>
+                <input type="radio" id="others" name="gender" value="O">
+                <label for="others">Others</label>
+            </div>
+            <div class="dob">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" required>
+            </div>
+            <div class="designation">
+                <label for="designation">Designation</label>
+                <input type="text" id="designation" name="designation" required>
+            </div>
+            <div class="pictures">
+                <label for="profile_pic">Add Your Pictures</label>
+                <input type="file" id="profile_pic" name="profile_pic" required>
+            </div>
+            <div class="foodBox">
+                <label>Select your favourite types of Food:</label>
+                <div class="foods">
+                    <div class="f1">
+                        <input type="checkbox" id="american" name="food_preferences[]" value="american">
+                        <label for="american">American</label><br>
+                        <input type="checkbox" id="chinese" name="food_preferences[]" value="chinese">
+                        <label for="chinese">Chinese</label><br>
+                        <input type="checkbox" id="french" name="food_preferences[]" value="french">
+                        <label for="french">French</label><br>
+                    </div>
+                    <div class="f1">
+                        <input type="checkbox" id="italian" name="food_preferences[]" value="italian">
+                        <label for="italian">Italian</label><br>
+                        <input type="checkbox" id="indian" name="food_preferences[]" value="indian">
+                        <label for="indian">Indian</label><br>
+                        <input type="checkbox" id="japanese" name="food_preferences[]" value="japanese">
+                        <label for="japanese">Japanese</label><br>
+                    </div>
+                    <div class="f1">
+                        <input type="checkbox" id="korean" name="food_preferences[]" value="korean">
+                        <label for="korean">Korean</label><br>
+                        <input type="checkbox" id="mexican" name="food_preferences[]" value="mexican">
+                        <label for="mexican">Mexican</label><br>
+                        <input type="checkbox" id="thai" name="food_preferences[]" value="thai">
+                        <label for="thai">Thai</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="email">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" readonly required>
+            </div>
+            <div class="btn">
+                <input type="submit" value="Submit" class="submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

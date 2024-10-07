@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <form action="login.php" method="post">
+        <h2>Log In</h2>
+
+        <div class="email">
+            <span><input type="email" name="email" placeholder="Email" required></span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"/></svg></span>
+        </div>
+
+        <div class="password">
+            <span><input type="password" name="password" placeholder="Password" required></span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"/></svg></span>
+        </div>
+
+        <div class="remember">
+            <input type="checkbox" id="remember-pass" name="remember" value="yes">
+            <label for="remember-pass"><span class="rem-text">Remember Me?</span></label>
+        </div>
+
+        <div class="forget-pass">
+            <a href="forgot-password.html">Forgot password?</a>
+        </div>
+
+        <div>
+            <button type="submit" class="btn">Log In</button>
+        </div>
+
+        <div class="register">
+            <p>Don't have an account? <a href="signup1.html">Sign-up</a></p>
+        </div>
+    </form>
+</body>
+</html>
