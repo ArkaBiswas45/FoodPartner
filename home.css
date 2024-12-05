@@ -112,12 +112,23 @@ nav {
     border-radius: 8px;
     transition: all .3s ease-out;
 }
+
 .nav2 ul li :hover{
     list-style-type: none;
     /* padding: 0px 15px 0px 15px; */
-    background-color: var(--text-color);
+    /* background-color: var(--text-color);
     color: var(--bg-color);
-    font-size: 16px;
+    font-size: 16px; */
+}
+.nav2 ul li .msg svg {
+    /* margin-top: 2px; */
+    width: 35px; /* Change width */
+    height: 35px; /* Change height */
+    transition: transform 0.2s ease-in-out;
+}
+
+li .msg svg:hover {
+    transform: scale(1.1); /* Enlarge on hover */
 }
 /* ... existing styles ... */
 
@@ -232,16 +243,20 @@ header{
 }
 .section1 .search .sinput{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 .section1 .search .sinput button{
-    border-radius: 35px;
+    /* border-radius: 35px; */
     background: none;
     color: var(--bg-color);
-    border: 2px solid var(--bg-color);
-    font-family: "Poppins", sans-serif;
+    /* border: 2px solid var(--bg-color); */
+    /* font-family: "Poppins", sans-serif; */
+    margin: 60px 19px 19px 0px;
+}
+.section1 .search .sinput button img{
+    width: 30px;
 }
 .hero{
     display: flex;
@@ -266,7 +281,7 @@ header{
 
 .search input{
     align-items: center;
-    margin: 60px 19px 19px;
+    margin: 60px 0px 19px 19px;
     width: 265px;
     height: 42px;
     border: 2px solid var(--bg-color);

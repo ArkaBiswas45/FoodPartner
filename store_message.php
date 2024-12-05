@@ -3,7 +3,7 @@ session_start();
 
 // Check if the request is an AJAX POST request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    header('Content-Type: application/json'); // Ensure correct response type
+    header('Content-Type: application/json');
 
     // Check if the user is logged in by checking the session
     if (isset($_SESSION['email'])) {
@@ -15,7 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Get the incoming email and message from the POST data
     $incoming_email_id = isset($_POST['incoming_email_id']) ? filter_var($_POST['incoming_email_id'], FILTER_SANITIZE_EMAIL) : null;
-    $msg = isset($_POST['msg']) ? filter_var($_POST['msg'], FILTER_SANITIZE_STRING) : null;
+    // $msg = isset($_POST['msg']) ? filter_var($_POST['msg'], FILTER_SANITIZE_STRING) : null;
+    // $msg = isset($_POST['msg']) ? html_entity_decode(filter_var($_POST['msg'], FILTER_SANITIZE_STRING), ENT_QUOTES, 'UTF-8') : null;
+    $msg = isset($_POST['msg']) ? html_entity_decode(filter_var($_POST['msg'], FILTER_SANITIZE_FULL_SPECIAL_CHARS), ENT_QUOTES, 'UTF-8') : null;
+
+
 
     // Check if required fields are provided
     if (empty($incoming_email_id) || empty($msg)) {
@@ -35,6 +39,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the connection was successful
     if ($conn->connect_error) {
         echo json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]);
+        exit;
+    }
+
+    // Check if a conversation already exists between the logged-in user and the incoming email
+    $checkQuery = "
+        SELECT * FROM messages 
+        WHERE (incoming_email_id = ? AND outgoing_email_id = ?) 
+        OR (incoming_email_id = ? AND outgoing_email_id = ?)
+    ";
+    $checkStmt = $conn->prepare($checkQuery);
+    $checkStmt->bind_param('ssss', $incoming_email_id, $outgoing_email_id, $outgoing_email_id, $incoming_email_id);
+    $checkStmt->execute();
+    $checkResult = $checkStmt->get_result();
+
+    if ($checkResult->num_rows > 0) {
+        // If a conversation exists, do not send the message
+        echo json_encode(['status' => 'error', 'message' => 'A conversation already exists']);
         exit;
     }
 
@@ -67,4 +88,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('HTTP/1.1 405 Method Not Allowed');
     echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
 }
+
 ?>

@@ -179,14 +179,15 @@ $email = $profile['email'];
         <p>Age: <?php echo $age; ?></p>
         <div class="button">
             <div class="msg b1">
-                <button id="openChat">Set Date</button>
+                 <button id="setDateButton">Set Date</button>
             </div>
+
             <a href="foodpartner.php?next=true" class="b2">Next</a>
         </div>
     </div>
 </div>
 
-<!-- Chat Popup Structure -->
+<!-- Chat Popup Structure-->
 <div id="chatPopup" class="chat-popup">
     <div class="chat-header">
         <img src="<?php echo htmlspecialchars($profile_pic); ?>" alt="Profile" class="profile-pic">
@@ -202,14 +203,14 @@ $email = $profile['email'];
     </div>
     <div class="chat-body">
         <div class="message-display" id="messageDisplay">
-            <!-- Chat messages will appear here -->
+            <!-- Chat messages will appear here-->
         </div>
     </div>
     <div class="chat-footer">
         <input type="text" id="messageInput" placeholder="Type a message here...">
         <button id="sendMessage"><img src="assets/Images/send-icon.jpg" alt="Send"></button>
     </div>
-</div>
+</div> 
 
 <!-- Adding the necessary PHP script to pass the incoming email ID -->
 <script>
@@ -217,6 +218,7 @@ $email = $profile['email'];
 </script>
 
 <!-- Include JS files -->
+ <script src="setDateButton.js"></script>
 <script src="chat-popup.js"></script>
 <script src="send_msg.js"></script>
 <script src="home1.js"></script>

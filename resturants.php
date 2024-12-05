@@ -36,6 +36,47 @@ if (isset($_SESSION['email'])) {
         }
         $stmt->close();
     }
+    // Handle search query
+if (isset($_GET['search'])) {
+    $searchQuery = strtolower(trim($_GET['search']));
+
+    // Fetch all search terms from the database
+    $sql = "SELECT search_term, page_name FROM search_mappings";
+    $result = $conn->query($sql);
+
+    $closestMatch = null;
+    $closestPage = null;
+    $shortestDistance = -1;
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $searchTerm = strtolower($row['search_term']);
+            $pageName = $row['page_name'];
+
+            // Calculate Levenshtein distance between the search query and the search term
+            $distance = levenshtein($searchQuery, $searchTerm);
+
+            // If this is the closest match or the first match
+            if ($shortestDistance == -1 || $distance < $shortestDistance) {
+                $closestMatch = $searchTerm;
+                $closestPage = $pageName;
+                $shortestDistance = $distance;
+            }
+        }
+    }
+
+    // Set a threshold for acceptable matches (adjust based on the length of terms)
+    $threshold = 3; // Acceptable distance for misspellings
+    if ($shortestDistance != -1 && $shortestDistance <= $threshold) {
+        // Redirect to the closest matching page
+        header("Location: " . $closestPage);
+        exit();
+    } else {
+        // Handle the case where no close match is found
+        echo "No matching page found for the search term.";
+    }
+}
+
 }
 ?>
 
@@ -101,7 +142,12 @@ if (isset($_SESSION['email'])) {
                 </span>
             </div>
             <div class="search">
-                <input type="search" placeholder="Search">
+                <form action="" method="get">
+                    <div class="sinput">
+                        <input type="search" name="search" placeholder="Food or Restaurants">
+                        <!-- <button type="submit">Search</button> -->
+                    </div>
+                </form>
             </div>
             
         </div>
@@ -146,7 +192,7 @@ if (isset($_SESSION['email'])) {
 
         <div class="separation"></div>
 
-        <div class="section0">
+        <!-- <div class="section0">
             <div class="h1">
                 <span>Your daily Deals</span>
                 <span class="text"><a href="see-all">See all</a></span>
@@ -180,12 +226,12 @@ if (isset($_SESSION['email'])) {
                     <div class="text"><a href="Sultan's-Dine">Sultan's-Dine-Dhanmondi</a></div>
                 </div>
             </div>
-        </div>
+        </div>s
 
-        <div class="separation"></div>
+        <div class="separation"></div> -->
 
         <div class="center">
-            <div class="left">
+            <!-- <div class="left">
                 <div class="filter-option">
                     <h2>Sort By</h2>
                     <select>
@@ -222,7 +268,7 @@ if (isset($_SESSION['email'])) {
                     <label><input type="radio" name="price" value="high-to-low"> High to Low</label>
                 </div>
                 <button class="add-filter-btn">Add Filter</button>
-            </div>
+            </div> -->
 
             <div class="right">
                 <div class="section3">

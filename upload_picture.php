@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-
 // Include the database connection file
 include('db_connection.php');
-
 
 // Check if the user is logged in
 if (!isset($_SESSION['email'])) {
@@ -12,9 +10,7 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-
 $email = $_SESSION['email'];
-
 
 // Check if a file was uploaded
 if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == UPLOAD_ERR_OK) {
@@ -25,15 +21,13 @@ if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == UPLOAD_E
     $fileType = $_FILES['profile_pic']['type'];
     $fileNameCmps = explode(".", $fileName);
     $fileExtension = strtolower(end($fileNameCmps));
-   
+    
     // Sanitize the file name
     $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-
 
     // Directory where the file should be uploaded
     $uploadFileDir = 'uploads/';
     $dest_path = $uploadFileDir . $newFileName;
-
 
     // Check if the file is an image
     $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
@@ -46,7 +40,6 @@ if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == UPLOAD_E
             if ($stmt === false) {
                 die("Error preparing the statement: " . $conn->error);
             }
-
 
             // Bind parameters and execute the query
             $stmt->bind_param("ss", $dest_path, $email);
@@ -70,7 +63,6 @@ if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == UPLOAD_E
         echo "No file uploaded.";
     }
 }
-
 
 $conn->close();
 ?>

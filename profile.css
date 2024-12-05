@@ -6,13 +6,6 @@
     --stay-color:#525FE1;
 }
 
-body{
-    background-color: var(--bg-color);
-    margin: 0;
-    padding: 0;
-}
-
-/* Navigation and Header */
 .logo img {
     width: 40px;
     height: 40px;
@@ -23,53 +16,122 @@ body{
     gap: 15px;
 }
 .logo p {
+    /* text-align:center; */
     margin: auto;
+}
+@media screen and (max-width: 982px){
+    .logo img {
+        width: 20px;
+        height: 20px;
+        padding: 8px 0px;
+    }
+    .logo p {
+        /* text-align:center; */
+        margin: auto;
+        font-size: 10px;
+    }
+
+}
+
+body{
+    background-color: var(--bg-color);
 }
 
 nav {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    /* border: 2px solid black; */
+    margin: 0px;
+    padding: 0px;
     color: var(--text-color);
     font-family: "Poppins", sans-serif;
     font-weight: 500;
+    font-style: normal;
+    /* border-radius: 15px; */
+    /* background-color: bisque; */
 }
 
-.nav1 ul, .nav2 ul {
+.nav1 ul {
     display: flex;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
 }
-.nav1 ul li, .nav2 ul li {
+.nav1 ul li{
     list-style-type: none;
 }
-
-.nav1 ul li a, .nav2 ul li a {
-    text-decoration: none;
-    padding: 0px 15px;
-    color: var(--text-color);
-    border-radius: 8px;
-    transition: all .3s ease-out;
-}
-
 /* Active menu item styling */
 .nav1 ul li a.active,
 .nav2 ul li a.active {
     background-color: var(--stay-color);
     color: var(--bg-color);
+    font-size: 16px;
 }
 
-/* Profile Dropdown */
+.nav1 ul li a{
+    text-decoration: none;
+    padding: 0px 15px 0px 15px;
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: all .4s ease-out;
+}
+.nav1 ul li :hover{
+    list-style-type: none;
+    padding: 0px 15px 0px 15px;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-size: 16px;
+}
+@media screen and (max-width: 982px){
+    .nav1 ul li {
+        list-style-type: none;
+    }
+    .nav1 ul li a{
+        padding: 0px 5px 0px 5px;
+        font-size: 10px;
+    }
+    .nav1 ul li :hover{
+        padding: 0px 5px 0px 5px;
+        font-size: 11px;
+    }
+    .nav1 ul {
+        padding: 2px;
+    }
+}
+
+.nav2 ul {
+    display: flex;
+    align-items: center;
+}
+
+.nav2 ul li{
+    list-style-type: none;
+}
+
+.nav2 ul li a{
+    text-decoration: none;
+    padding: 0px 15px 0px 15px;
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: all .3s ease-out;
+}
+.nav2 ul li :hover{
+    list-style-type: none;
+    /* padding: 0px 15px 0px 15px; */
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-size: 16px;
+}
+/* ... existing styles ... */
+
 .profile-dropdown {
     position: relative;
     display: inline-block;
 }
 
+
 .profile-toggle {
     display: flex;
     align-items: center;
     cursor: pointer;
+    text-decoration: none;
     color: var(--stay-color);
 }
 
@@ -77,7 +139,8 @@ nav {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    display: none; /* Default hidden */
+    display: none; 
+    /* Default hidden, shown if user has profile image */
 }
 
 .profile-toggle span {
@@ -91,7 +154,7 @@ nav {
     justify-content: center;
     font-size: 20px;
     font-weight: bold;
-    display: none; /* Default hidden */
+     display: none; /*Default hidden, shown if user has initial */
 }
 
 .profile-menu {
@@ -120,21 +183,32 @@ nav {
     background-color: var(--stay-color);
     color: white;
 }
-
+@media screen and (max-width: 982px){
+    .nav2 ul li {
+        list-style-type: none;
+    }
+    .nav2 ul li a{
+        padding: 0px 5px 0px 5px;
+        font-size: 10px;
+    }
+    .nav2 ul li :hover{
+        padding: 0px 5px 0px 5px;
+        font-size: 11px;
+    }
+    .nav2 ul {
+        padding: 2px;
+    }
+}
 header{
     position: sticky;
     top: 0;
-    background-color: var(--bg-color);
+   background-color: var(--bg-color);
 }
-
 .separation{
     width: 100%;
     height: 7px;
     background-color: rgb(73, 73, 73);
 }
-
-
-/* Profile Section */
 .profile{
     font-family: "Poppins", sans-serif;
     font-weight: 500;
@@ -144,19 +218,19 @@ header{
     align-items: center;
     height: 600px;
     gap: 100px;
- }
- .profile-pic{
+}
+.profile-pic .img{
     width: 500px;
     height: 500px;
     overflow: hidden;
     /* border: 2px solid black; */
- }
- .profile-pic img{
+}
+.profile-pic .img img{
     width: 100%;
     height: 100%;
     object-fit: cover;
- }
- .info{
+}
+.info{
     display: flex;
     justify-content: center;
     align-items: normal;
@@ -165,15 +239,8 @@ header{
     height: 500px;
     overflow: hidden;
     /* border: 2px solid black; */
- }
- .button{
-    height: 100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
- }
- .button a{
+}
+.profile .cbtn button{
     text-decoration: none;
     /* border: 2px solid black; */
     width: 100px;
@@ -183,128 +250,5 @@ header{
    justify-content: center;
    align-items: center;
    color: black;
- }
- .b1{
-    background-color: rgb(255, 152, 234);
- }
- .b2{
-    background-color:rgb(83, 123, 255);
- }
-
-@media screen and (max-width: 982px) {
-    nav {
-        flex-wrap: nowrap; /* Ensure nav stays on one line */
-        justify-content: space-between; /* Adjust spacing for compactness */
-    }
-    .profile{
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .logo img {
-        width: 20px;
-        height: 20px;
-        padding: 4px 0px;
-    }
-
-    .logo p {
-        font-size: 10px;
-    }
-
-    .nav1 ul li a, .nav2 ul li a {
-        padding: 0px 8px;
-        font-size: 10px;
-    }
-
-    .profile-toggle img, .profile-toggle span {
-        width: 20px;
-        height: 20px;
-        font-size: 14px;
-    }
-
-    .profile-pic {
-        width: 200px;
-        height: 200px;
-    }
-
-    .info {
-        max-width: 100%;
-        padding: 0 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .button a {
-        width: 60px;
-        height: 25px;
-        font-size: 10px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    nav {
-        padding: 5px;
-    }
-    .profile{
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        padding: 20px;
-    }
-    .logo img {
-        width: 15px;
-        height: 15px;
-    }
-
-    .logo p {
-        font-size: 8px;
-    }
-
-    .nav1 ul li a, .nav2 ul li a {
-        padding: 0px 5px;
-        font-size: 8px;
-    }
-
-    .profile-toggle img, .profile-toggle span {
-        width: 18px;
-        height: 18px;
-        font-size: 12px;
-    }
-
-    .profile-dropdown:hover .profile-menu {
-        right: 10px; /* Ensure dropdown stays within mobile view */
-    }
-
-    .profile-pic {
-        width: 150px;
-        height: 150px;
-    }
-
-    .info {
-        max-width: 100%;
-        padding: 0 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .button a {
-        width: 50px;
-        height: 20px;
-        font-size: 8px;
-    }
-}
-@media screen and (max-width: 982px) {
-    .separation {
-        height: 3px;
-    }
+   background-color: #a0a4ff;
 }

@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 session_start();
 
 // Include the database connection file
@@ -14,8 +12,8 @@ if (!isset($_SESSION['email'])) {
 
 $email = $_SESSION['email'];
 
-// Prepare SQL query to fetch user details including status
-$sql = "SELECT u.firstname, u.lastname, u.status, ud.profile_pic, ud.designation, ud.date_of_birth, ud.food_preferences 
+// Prepare SQL query to fetch user details
+$sql = "SELECT u.firstname, u.lastname, ud.profile_pic, ud.designation, ud.date_of_birth, ud.food_preferences 
         FROM users u 
         JOIN user_details ud ON u.email = ud.email 
         WHERE u.email = ?";
@@ -41,15 +39,11 @@ if ($result->num_rows > 0) {
     $designation = $row['designation'];
     $date_of_birth = $row['date_of_birth'];
     $food_preferences = $row['food_preferences'];
-    $status = $row['status']; // Get user status
 
     // Calculate age
     $date_of_birth_obj = new DateTime($date_of_birth);
     $current_date = new DateTime();
     $age = $current_date->diff($date_of_birth_obj)->y;
-
-    // Get user's initials if no profile picture is set
-    $initials = strtoupper($firstname[0] . $lastname[0]);
 } else {
     echo "User data not found!";
     exit();
@@ -59,15 +53,18 @@ if ($result->num_rows > 0) {
 $stmt->close();
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="profile.css">
 </head>
+
+
 <body>
     <header>
         <nav>
@@ -86,29 +83,25 @@ $conn->close();
             </div>
             <div class="nav2">
                 <ul>
-                <?php if (!isset($_SESSION['loggedin'])): // Check if the user is not logged in ?>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="signup1.html">Sign Up</a></li>
-                    <?php else: // If the user is logged in ?>
-                        <!-- Profile Dropdown -->
-                        <li class="profile-dropdown">
-                            <a href="#" class="profile-toggle">
-                                <img src="<?php echo ($profile_pic) ? htmlspecialchars($profile_pic) : 'assets/Images/default-profile.png'; ?>" alt="Profile" id="profileImage">
-                                <span id="profileInitial"><?php echo htmlspecialchars($initials); ?></span>
-                            </a>
-                            <div class="profile-menu">
-                                <a href="profile.php">Profile</a> 
-                                <a href="logout.php">Logout</a>
-                            </div>
-                        </li>
-                    <?php endif; ?>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup1.html">Sign Up</a></li>
+                    <!-- Profile Dropdown -->
+                    <li class="profile-dropdown">
+                        <a href="#" class="profile-toggle">
+                            <img src="assets/Images/default-profile.png" alt="Profile" id="profileImage">
+                            <span id="profileInitial"><?php echo $initials; ?></span>
+                        </a>
+                        <div class="profile-menu">
+                            <a href="profile.html">Profile</a>
+                            <a href="settings.html">Settings</a>
+                            <a href="logout.html">Logout</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
+        <div class="separation"></div>
     </header>
-    
-    <div class="separation"></div>
-
     <div class="profile">
         <div class="profile-pic">
             <!-- Profile Picture -->
@@ -121,14 +114,9 @@ $conn->close();
             </div>
         </div>
         <div class="info">
-            <h1>
-                <?php echo htmlspecialchars($firstname) . ' ' . htmlspecialchars($lastname); ?>
-                <?php if ($status == 1): // Show green dot if user is online ?>
-                    <span class="status-indicator" style="display: inline-block; background-color: #27d727; width: 10px; height: 10px; border-radius: 50%; margin-left: 10px;"></span>
-                <?php endif; ?>
-            </h1>
+            <h1><?php echo htmlspecialchars($firstname) . ' ' . htmlspecialchars($lastname); ?></h1>
             <p class="designation">
-                <?php echo htmlspecialchars($designation); ?>
+            <?php echo htmlspecialchars($designation); ?>
                 <a href="edit_designation.php">Edit</a>
             </p>
             <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($date_of_birth); ?></p>
@@ -136,10 +124,7 @@ $conn->close();
             <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?>
                 <a href="edit_email.php">Edit</a>
             </p>
-            <p><strong>Food Preferences:</strong> 
-                <div class="food-pref">
-                    <?php echo htmlspecialchars($food_preferences); ?>
-                </div>
+            <p><strong>Food Preferences:</strong> <?php echo htmlspecialchars($food_preferences); ?>
                 <a href="edit_food_preferences.php">Edit</a>
             </p>
             <a href="change_password.php" class="change-password">Change Password</a>
@@ -151,6 +136,7 @@ $conn->close();
         </form>
     </div>
 
+
     <script>
         function triggerFileInput() {
             document.getElementById('fileInput').click();
@@ -159,4 +145,6 @@ $conn->close();
     <script src="home1.js"></script>
     <script src="home.js"></script>
 </body>
+
+
 </html>
