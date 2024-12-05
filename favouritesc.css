@@ -119,6 +119,22 @@ nav {
     color: var(--bg-color);
     font-size: 16px;
 }
+.nav2 ul li .msg svg {
+    /* margin-top: 2px; */
+    width: 35px; /* Change width */
+    height: 35px; /* Change height */
+    transition: transform 0.2s ease-in-out;
+}
+.badge {
+    position: static;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 9px;
+    border-radius: 50%;
+    padding: 2px 6px;
+}
 /* ... existing styles ... */
 
 .profile-dropdown {

@@ -59,9 +59,17 @@ function getPlaceName(lat, lng) {
             spinner.style.display = 'none'; // Hide spinner after fetching data
 
             if (data && data.address) {
-                const placeName = data.display_name;
-                // Display place name in the search bar
-                document.querySelector('.search input').value = placeName;
+                const address = data.address;
+
+                // Extract the nearby Thana or Police Station
+                const thanaOrPoliceStation = address.neighbourhood || address.suburb || address.village || address.city_district || address.county || address.town || address.city;
+
+                if (thanaOrPoliceStation) {
+                    // Display Thana or Police Station in the search bar
+                    document.querySelector('.search input').value = thanaOrPoliceStation;
+                } else {
+                    alert("Unable to find nearby Thana or Police Station.");
+                }
             } else {
                 alert("Geocoding failed.");
             }
@@ -72,3 +80,4 @@ function getPlaceName(lat, lng) {
             console.error("Error fetching place name: ", error);
         });
 }
+

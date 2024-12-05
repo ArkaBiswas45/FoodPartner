@@ -11,7 +11,7 @@ document.getElementById('setDateButton').addEventListener('click', function () {
     const message = "Let's talk";
 
     // Send the message using an AJAX request
-    fetch('store_message.php', {
+    fetch('store_message1.php', {  // Changed to 'store_message1.php'
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

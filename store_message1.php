@@ -39,28 +39,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Restrict initial message for "set_date" action
-    if ($action === 'set_date') {
-        // Check if a conversation already exists
-        $checkQuery = "
-            SELECT * FROM messages 
-            WHERE (incoming_email_id = ? AND outgoing_email_id = ?) 
-            OR (incoming_email_id = ? AND outgoing_email_id = ?)
-        ";
-        $checkStmt = $conn->prepare($checkQuery);
-        $checkStmt->bind_param('ssss', $incoming_email_id, $outgoing_email_id, $outgoing_email_id, $incoming_email_id);
-        $checkStmt->execute();
-        $checkResult = $checkStmt->get_result();
+    // Check if a conversation already exists between the incoming and outgoing email
+    $checkQuery = "
+        SELECT * FROM messages 
+        WHERE (incoming_email_id = ? AND outgoing_email_id = ?) 
+        OR (incoming_email_id = ? AND outgoing_email_id = ?)
+    ";
+    $checkStmt = $conn->prepare($checkQuery);
+    $checkStmt->bind_param('ssss', $incoming_email_id, $outgoing_email_id, $outgoing_email_id, $incoming_email_id);
+    $checkStmt->execute();
+    $checkResult = $checkStmt->get_result();
 
-        if ($checkResult->num_rows > 0) {
-            // If a conversation exists, do not send the message
-            echo json_encode(['status' => 'error', 'message' => 'A conversation already exists']);
-            exit;
-        }
+    if ($checkResult->num_rows > 0) {
+        // If a conversation exists, do not send the message
+        echo json_encode(['status' => 'error', 'message' => 'A conversation already exists']);
+        exit;
     }
 
     // Prepare the SQL statement to insert the message and accept_status
-    $sql = "INSERT INTO messages (incoming_email_id, outgoing_email_id, msg, accept_status) VALUES (?, ?, ?, 1)";
+    $sql = "INSERT INTO messages (incoming_email_id, outgoing_email_id, msg, accept_status) VALUES (?, ?, ?, 0)";
     $stmt = $conn->prepare($sql);
 
     // Check if the statement was prepared successfully
@@ -88,4 +85,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('HTTP/1.1 405 Method Not Allowed');
     echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
 }
-?>
