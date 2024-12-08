@@ -24,6 +24,8 @@ if ($conn->connect_error) {
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $email = $_POST['email'];
+$location = $_POST['location'];  // New location field
+$area = $_POST['area']; 
 $password = $_POST['password'];
 $confirm_password = $_POST['confirm_password'];
 
@@ -36,16 +38,16 @@ if ($password !== $confirm_password) {
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // SQL to insert data into users table
-$sql = "INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)";
+$sql = "INSERT INTO users (firstname, lastname, email, password, location, area) VALUES (?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssss", $firstname, $lastname, $email, $hashed_password);
+$stmt->bind_param("ssssss", $firstname, $lastname, $email, $hashed_password, $location, $area);
 
 if ($stmt->execute()) {
     // Store the email in session
     $_SESSION['email'] = $email;
     // Redirect to the second signup page
-    header("Location: signup2.php");
+    header("Location: signup2.html");
     exit();
 } else {
     echo "Error: " . $stmt->error;

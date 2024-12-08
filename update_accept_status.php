@@ -27,6 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Update the accept_status in the messages table
     $stmt = $conn->prepare("UPDATE messages SET accept_status = ? WHERE msg_id = ?");
+    if (!$stmt) {
+        echo json_encode(['status' => 'error', 'message' => 'Failed to prepare statement: ' . $conn->error]);
+        $conn->close();
+        exit;
+    }
+
     $stmt->bind_param('ii', $accept_status, $msg_id);
 
     if ($stmt->execute()) {
@@ -41,4 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('HTTP/1.1 405 Method Not Allowed');
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
-?>

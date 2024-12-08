@@ -319,7 +319,7 @@ if (isset($_GET['search'])) {
                 <div class="section3">
                     <div class="h1">
                         <span>Top Places in Dhaka</span>
-                        <span class="text"><a href="see-all">See all</a></span>
+                        <span class="text"><a href="top_place.php">See all</a></span>
                     </div>
                     <div class="box">
                         <div class="box1">

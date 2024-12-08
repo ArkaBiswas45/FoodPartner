@@ -106,22 +106,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $designation = $_POST['designation'];
     $email = $_SESSION['email']; // Use email from session
 
-    // Debugging: Output the $_POST data and $_FILES array
-    echo "<pre>";
-    print_r($_POST);
-    print_r($_FILES);
-    echo "</pre>";
-
     // File upload handling
     $target_dir = "uploads/";
     $profile_pic = $target_dir . basename($_FILES["profile_pic"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($profile_pic, PATHINFO_EXTENSION));
-
-    // Debugging: Check if the file was uploaded
-    if ($_FILES['profile_pic']['error'] !== UPLOAD_ERR_OK) {
-        echo "Upload failed with error code: " . $_FILES['profile_pic']['error'];
-    }
 
     // Check if file is an actual image
     $check = getimagesize($_FILES["profile_pic"]["tmp_name"]);
@@ -146,7 +135,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
     } else {
-        // Debugging: Check if the file is moving to the target directory
         if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $profile_pic)) {
             echo "The file ". basename($_FILES["profile_pic"]["name"]). " has been uploaded.";
         } else {
@@ -166,8 +154,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssss", $email, $gender, $date_of_birth, $designation, $profile_pic, $food_preferences);
 
     if ($stmt->execute()) {
-        echo "Record successfully inserted into user_details table.";
-
         // Redirect to login page after successful insertion
         header("Location: login.html");
         exit();

@@ -15,7 +15,7 @@ include 'track_visit.php';  // This will track the visit count
         <div class="header-content">
             <img src="assets/Images/waffleup-logo.png" alt="KFC Logo" class="logo">
             <div class="header-text">
-                <h1>Waffle Up</h1>
+                <h1>Waffle Up</h1> 
                 <div class="ratings">
                     <span>★★★★☆</span>
                     <a href="#reviews">See Reviews</a>

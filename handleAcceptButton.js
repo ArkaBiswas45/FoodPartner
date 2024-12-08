@@ -11,19 +11,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
-                body: `msg_id=${msgId}`,
+                body: `msg_id=${msgId}&accept_status=1`, // Ensure accept_status is sent
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        // If the response is not OK (e.g., 500, 404), throw an error
+                        return response.text().then((text) => {
+                            throw new Error(`HTTP ${response.status}: ${text}`);
+                        });
+                    }
+                    return response.json(); // Parse JSON for a successful response
+                })
                 .then((data) => {
-                    if (data.success) {
+                    if (data.status === "success") {
                         alert("Message request accepted.");
                         button.parentElement.parentElement.remove(); // Remove the message request from the list
-                        
                     } else {
-                        alert("Failed to accept the message request.");
+                        // Show server's error message if any
+                        alert(`Failed to accept the message request: ${data.message}`);
                     }
                 })
-                .catch((error) => console.error("Error:", error));
+                .catch((error) => {
+                    // Catch and display any errors
+                    alert(`An error occurred: ${error.message}`);
+                    console.error("Error:", error);
+                });
         });
     });
 });

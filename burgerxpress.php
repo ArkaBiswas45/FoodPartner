@@ -1,5 +1,6 @@
 <?php
 include 'track_visit.php';  // This will track the visit count
+include 'nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +25,9 @@ include 'track_visit.php';  // This will track the visit count
                     <a href="#more-info">More Info</a>
                 </div>
             </div>
+        </div>
+        <div class="btn">
+            <a href="reservation_form.php?title=Burger%20Xpress">reserve a table</a>
         </div>
     </header>
 

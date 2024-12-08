@@ -8,7 +8,7 @@ document.getElementById('signup-form').addEventListener('submit', function(event
     xhr.onload = function() { 
         if (xhr.status === 200) { 
             // Redirect to signup2.html after successful submission 
-            window.location.href = 'signup2.php'; 
+            window.location.href = 'signup2.html'; 
         } else { 
             alert('An error occurred: ' + xhr.responseText); 
         } 

@@ -1,6 +1,8 @@
 <?php
 session_start();
+// include 'messages.php';
 include 'count_unreadReq.php';
+
 $initials = '';
 $profilePicUrl = 'assets/Images/default-profile.png'; // Default profile image
 
@@ -36,31 +38,54 @@ if (isset($_SESSION['email'])) {
         }
         $stmt->close();
     }
-/*
-    // Handle search query
-    if (isset($_GET['search'])) {
-        $searchQuery = strtolower(trim($_GET['search']));
 
-        // Query the search_mappings table
-        $sql = "SELECT page_name FROM search_mappings WHERE search_term LIKE ?";
-        $stmt = $conn->prepare($sql);
-        $searchTerm = "%$searchQuery%"; // Use wildcard search pattern
-        $stmt->bind_param("s", $searchTerm);
-        $stmt->execute();
-        $stmt->bind_result($page_name);
-        $stmt->fetch();
-        $stmt->close();
+// Handle search query
+if (isset($_GET['search'])) {
+    $searchQuery = strtolower(trim($_GET['search']));
 
-        // Redirect to the corresponding page if found
-        if (!empty($page_name)) {
-            header("Location: " . $page_name);
-            exit();
-        } else {
-            // Handle the case where no match is found
-            echo "No matching page found for the search term.";
+    // Check if the search query is empty
+    if (empty($searchQuery)) {
+        echo "Please enter a search term.";
+        exit();
+    }
+
+    // Fetch all search terms from the database
+    $sql = "SELECT search_term, page_name FROM search_mappings";
+    $result = $conn->query($sql);
+
+    $closestMatch = null;
+    $closestPage = null;
+    $shortestDistance = -1;
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $searchTerm = strtolower($row['search_term']);
+            $pageName = $row['page_name'];
+
+            // Calculate Levenshtein distance between the search query and the search term
+            $distance = levenshtein($searchQuery, $searchTerm);
+
+            // If this is the closest match or the first match
+            if ($shortestDistance == -1 || $distance < $shortestDistance) {
+                $closestMatch = $searchTerm;
+                $closestPage = $pageName;
+                $shortestDistance = $distance;
+            }
         }
     }
-*/
+
+    // Set a threshold for acceptable matches (adjust based on the length of terms)
+    $threshold = 3; // Acceptable distance for misspellings
+    if ($shortestDistance != -1 && $shortestDistance <= $threshold) {
+        // Redirect to the closest matching page
+        header("Location: " . $closestPage);
+        exit();
+    } else {
+        // Handle the case where no close match is found
+        echo "No matching page found for the search term.";
+    }
+}
+
     $conn->close();
 }
 ?>
@@ -72,11 +97,11 @@ if (isset($_SESSION['email'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Partner</title>
-    <link rel="stylesheet" href="location.css">
+    <link rel="stylesheet" href="nav.css">
 </head>
 
 <body>
-<header>
+
         <nav>
             <div class="logo">
                 <img src="assets/Images/logo2.png" alt="img">
@@ -99,18 +124,18 @@ if (isset($_SESSION['email'])) {
                     <?php else: ?>
 
                         <!-- Profile Dropdown -->
-                        
-                    <li class="profile-dropdown">
-                        <button class="profile-toggle">
-                            <!-- Always display profile picture -->
-                            <img src="<?php echo htmlspecialchars($profilePicUrl); ?>" alt="Profile Picture" class="profile-img">
-                        </button>
-                        <div class="profile-menu">
-                            <a href="profile.php">Profile</a>
-                            <a href="logout.php">Logout</a>
-                        </div>
-                    </li>
-                    <li>
+
+                        <li class="profile-dropdown">
+                            <button class="profile-toggle">
+                                <!-- Always display profile picture -->
+                                <img src="<?php echo htmlspecialchars($profilePicUrl); ?>" alt="Profile Picture" class="profile-img">
+                            </button>
+                            <div class="profile-menu">
+                                <a href="profile.php">Profile</a>
+                                <a href="logout.php">Logout</a>
+                            </div>
+                        </li>
+                        <li>
                             <div class="msg">
                                 <a href="messages.php">
                                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -127,30 +152,11 @@ if (isset($_SESSION['email'])) {
                     <?php endif; ?>
                 </ul>
             </div>
+            
         </nav>
         <div class="separation"></div>
-    </header>
-    <main>
-        <div class="section1">
-            <div class="search">
-            <form action="redirect.php" method="get">
-                <input type="search" id="searchInput" name="location" placeholder="Enter Location for Restaurants" required>
-                <div id="spinner" class="spinner" style="display: none;"></div>
-            <!--  </div> -->
-            <div id="buttonContainer" class="button-container"> 
-           
-             <!-- <input type="search"  -->
-             <!-- <button type="submit"></button> -->
-              </form>
-                <button class="btn1" id="getLocationBtn">Add Current Location</button>
-                <button class="btn1" id="addLocationBtn">Add New Address</button>
-            </div>
-            <div id="locationOutput"></div>
-        </div>        
-    </main>
-    <script src="location.js"></script>
-    <script src="home1.js"></script>
-    <script src="home.js"></script>
+        
+
     
 </body>
 </html>

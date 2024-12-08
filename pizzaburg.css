@@ -1,5 +1,5 @@
 :root{
-    --bg-color: #f5ffe8;
+    --bg-color: #fcfcfc;
     --text-color:#00047e;
     --stay-color:#525FE1;
     --choose-color:  rgb(242, 168, 19);;
@@ -25,6 +25,9 @@
  
  /* Header styling */
  header {
+   display: flex;
+   justify-content: center;
+   align-items: center;
     background-color: transparent;
     color: black;
     text-align: center;
@@ -37,6 +40,18 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+ }
+ header .btn{
+   border: 2px solid black;
+   border-radius: 5px;
+   padding: 10px 0px;
+   margin: 10px;
+   background-color: #2338f6;
+ }
+ header .btn a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 10px 10px;
  }
  
  
